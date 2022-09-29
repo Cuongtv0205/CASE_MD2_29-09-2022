@@ -17,7 +17,7 @@ function menuAlbum() {
             managerAlbumUser2 = arrayAlbum[i];
         }
     }
-    var menu = "--Menu Album--\n\n                  ---1.Them Album---\n                  ---2.Xoa Album---\n                  ---3.Sua Album---\n                  ---4.Hien thi Album de tuong tac---\n                  ---5.Tim kiem theo ten gan dung---\n                  ---0.Thoat---";
+    var menu = "--Menu Album--\n\n                  ---1.Them Album---\n                  ---2.Xoa Album---\n                  ---3.Sua Album---\n                  ---4.Hien thi Album de tuong tac---\n                  ---5.Tim kiem theo ten Album---\n                  ---0.Thoat---";
     var choice;
     do {
         console.log(menu);
@@ -47,7 +47,7 @@ function menuAlbum() {
 function findNameAlbum(managerAlbumUser2) {
     var name = input.question('Nhap ten album can tim:');
     if (name.length == 0) {
-        console.log('Từ khóa không được để trống!');
+        console.log('Tu khoa khong duoc de trong!');
     }
     else {
         var flag = 0;
@@ -78,7 +78,7 @@ function showAlbumUser(managerAlbumUser2) {
         console.log("Stt : ".concat(i + 1, ", Ten Album: ").concat(managerAlbumUser2.listAlbum[i].name));
     }
     var choiceAlbum = +input.question('Nhap so album ban muon chon: ');
-    var menu = "--Menu BH trong Album--\n\n                  ---1.Them BH---\n                  ---2.Hien thi TT BH \u0111\u1EC3 t\u01B0\u01A1ng t\u00E1c---\n                  ---3.Tim kiem ten bai--\n                  ---0.Thoat---";
+    var menu = "--Menu BH trong Album--\n\n                  ---1.Them BH---\n                  ---2.Hien thi TT BH \u0111\u1EC3 t\u01B0\u01A1ng t\u00E1c---\n                  ---3.Tim kiem ten bai BH--\n                  ---0.Thoat---";
     var choice;
     do {
         console.log(menu);
@@ -112,7 +112,7 @@ function deleteAlbum(managerAlbumUser2) {
 function editAlbum(managerAlbumUser2) {
     console.log("--Sua ten Album--");
     if (managerAlbumUser2.listAlbum.length == 0) {
-        console.log('Ten Album sửa không được bỏ trống!');
+        console.log('Ten Album sua khong duoc bo trong!');
         menuAlbum();
     }
     var name = input.question('Nhap ten album can sua:');
@@ -128,7 +128,7 @@ function editAlbum(managerAlbumUser2) {
 function findNameMusic(managerAlbumUser2, choiceAlbum) {
     var name = input.question('Nhap ten bai hat can tim: ');
     if (name.length == 0) {
-        console.log('Tên BH không được để trống!');
+        console.log('Tên BH ko duoc de trong!');
     }
     else {
         var flat = 0;
@@ -139,7 +139,7 @@ function findNameMusic(managerAlbumUser2, choiceAlbum) {
             }
         }
         if (flat == 0) {
-            console.log('Tên Bh ko có!');
+            console.log('Tên Bh ko co!');
         }
     }
 }
@@ -182,10 +182,10 @@ function deleteMusic(managerAlbumUser2, choiceAlbum, choiceMusic) {
 }
 function editMusic(managerAlbumUser2, choiceAlbum, choiceMusic) {
     console.log("--Menu Sua BH--");
-    var newId = +input.question('Nhap id mới :');
-    var newName = input.question('Nhap ten bh mới cần thêm :');
-    var newSinger = input.question('Nhap ca si mới : ');
-    var newComposer = input.question('Nhap ten nhac  mới :');
+    var newId = +input.question('Nhap id moi :');
+    var newName = input.question('Nhap ten bh moi can them :');
+    var newSinger = input.question('Nhap ca si moi : ');
+    var newComposer = input.question('Nhap ten nhac si moi :');
     managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[choiceMusic - 1].id = newId;
     managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[choiceMusic - 1].name = newName;
     managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[choiceMusic - 1].singer = newSinger;
@@ -202,7 +202,7 @@ function addMusic(managerAlbumUser2, choiceAlbum) {
     managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic.push(newMusic);
 }
 function mainAccount() {
-    var menu = "--Menu \u0111\u0103ng k\u00FD v\u00E0 \u0111\u0103ng nh\u1EADp--\n\n                   ---1.\u0110\u0103ng k\u00FD---\n                   ---2.\u0110\u0103ng nh\u1EADp---\n                   ---0.Tho\u00E1t---";
+    var menu = "--Menu \u0111\u0103ng k\u00FD v\u00E0 \u0111\u0103ng nh\u1EADp--\n\n                   ---1.\u0110\u0103ng k\u00FD---\n                   ---2.\u0110\u0103ng nh\u1EADp---\n                   ---3.Quay lai---\n                   ---0.Tho\u00E1t---";
     var choice;
     do {
         console.log(menu);
@@ -212,6 +212,9 @@ function mainAccount() {
                 Register();
                 break;
             case 2:
+                Login();
+                break;
+            case 3:
                 Login();
                 break;
             case 0:
@@ -259,10 +262,16 @@ function Login() {
     var menu = "--DANG NHAP--";
     console.log(menu);
     var username = input.question('UserName :');
+    if (username.length == 0) {
+        console.log("---Ten user khong duoc de trong---");
+    }
     var password = input.question('PassWord :');
+    if (password.length == 0) {
+        console.log("---Ten pass ko dc de trong---");
+    }
     if (listAccount.findBy(username, password) == -1) {
         console.log('Bạn đăng nhập tài khoản thất bại');
-        Login();
+        Register();
     }
     else {
         console.log('Bạn đăng nhập thành công');

@@ -57,7 +57,7 @@ function menuAlbum() {
 function findNameAlbum(managerAlbumUser2: AlbumManager) {
     let name = input.question('Nhap ten album can tim:')
     if (name.length == 0) {
-        console.log('Từ khóa không được để trống!')
+        console.log('Tu khoa khong duoc de trong!')
     } else {
         let flag = 0;
         for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
@@ -80,7 +80,7 @@ function addAlbum(managerAlbumUser2: AlbumManager) {
     managerAlbumUser2.add(album);
 }
 
-function showAlbumUser(managerAlbumUser2: AlbumManager) {
+function showAlbumUser(managerAlbumUser2: AlbumManager,) {
     console.log(`--Chon Album--`);
     if (managerAlbumUser2.listAlbum.length == 0) {
         console.log('ko co album de chon');
@@ -130,7 +130,7 @@ function deleteAlbum(managerAlbumUser2: AlbumManager) {
 function editAlbum(managerAlbumUser2: AlbumManager) {
     console.log(`--Sua ten Album--`)
     if (managerAlbumUser2.listAlbum.length == 0) {
-        console.log('Ten Album sửa không được bỏ trống!');
+        console.log('Ten Album sua khong duoc bo trong!');
         menuAlbum();
     }
     let name = input.question('Nhap ten album can sua:');
@@ -147,7 +147,7 @@ function editAlbum(managerAlbumUser2: AlbumManager) {
 function findNameMusic(managerAlbumUser2: AlbumManager, choiceAlbum) {
     let name = input.question('Nhap ten bai hat can tim: ');
     if (name.length == 0) {
-        console.log('Tên BH không được để trống!')
+        console.log('Tên BH ko duoc de trong!')
     } else {
         let flat = 0;
         for (let i = 0; i < managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic.length; i++) {
@@ -157,11 +157,10 @@ function findNameMusic(managerAlbumUser2: AlbumManager, choiceAlbum) {
             }
         }
         if (flat == 0) {
-            console.log('Tên Bh ko có!');
+            console.log('Tên Bh ko co!');
         }
     }
 }
-
 
 function showMusic(managerAlbumUser2: AlbumManager, choiceAlbum) {
     console.log(`--TUONG TAC VOI BH--`)
@@ -237,6 +236,7 @@ function mainAccount() {
     let menu = `--Menu đăng ký và đăng nhập--\n
                    ---1.Đăng ký---
                    ---2.Đăng nhập---
+                   ---3.Quay lai---
                    ---0.Thoát---`
     let choice;
     do {
@@ -247,6 +247,9 @@ function mainAccount() {
                 Register();
                 break;
             case 2:
+                Login();
+                break;
+            case 3:
                 Login();
                 break;
             case 0:
@@ -294,13 +297,17 @@ function Register() {
 function Login() {
     let menu = `--DANG NHAP--`
     console.log(menu);
-
     let username = input.question('UserName :');
+    if (username.length==0){
+        console.log(`---Ten user khong duoc de trong---`)
+    }
     let password = input.question('PassWord :');
-
+       if (password.length==0){
+           console.log(`---Ten pass ko dc de trong---`)
+       }
     if (listAccount.findBy(username, password) == -1) {
         console.log('Bạn đăng nhập tài khoản thất bại');
-        Login();
+        Register();
     } else {
         console.log('Bạn đăng nhập thành công')
         userCheck = listAccount.findAccount(username, password);
