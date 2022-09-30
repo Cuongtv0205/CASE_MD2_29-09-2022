@@ -52,13 +52,17 @@ function findNameAlbum(managerAlbumUser2) {
     else {
         var flag = 0;
         for (var i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+            flag++;
             if (managerAlbumUser2.listAlbum[i].name == name) {
                 flag++;
                 console.log("".concat(flag, ", Ten Album : ").concat(managerAlbumUser2.listAlbum[i].name));
             }
+            else {
+                console.log("---Ko phai ten album can tim---");
+            }
         }
         if (flag == 0) {
-            console.log('--Ko co bh trong album can tim--');
+            console.log('--Ko co album can tim--');
         }
     }
 }
@@ -136,6 +140,9 @@ function findNameMusic(managerAlbumUser2, choiceAlbum) {
             if (managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[i].name == name) {
                 flat++;
                 console.log("Ten BH: ".concat(managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[i].name));
+            }
+            else {
+                console.log("--Ko phai BH can tim--");
             }
         }
         if (flat == 0) {
