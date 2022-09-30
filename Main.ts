@@ -47,7 +47,7 @@ function menuAlbum() {
                 findNameAlbum(managerAlbumUser2)
                 break;
             case 0:
-                console.log(menu);
+                mainAccount();
                 break;
 
         }
@@ -63,14 +63,14 @@ function findNameAlbum(managerAlbumUser2: AlbumManager) {
         for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
             flag++;
             if (managerAlbumUser2.listAlbum[i].name == name) {
-                    flag++;
-                    console.log(`${flag}, Ten Album : ${managerAlbumUser2.listAlbum[i].name}`)
-            }else {
+                flag++;
+                console.log(`${flag}, Ten Album : ${managerAlbumUser2.listAlbum[i].name}`)
+            } else {
                 console.log(`---Ko phai ten album can tim---`)
             }
         }
         if (flag == 0) {
-            console.log('--Ko co album can tim--')
+            console.log('--Ko co bh trong album can tim--')
         }
     }
 }
@@ -91,6 +91,7 @@ function showAlbumUser(managerAlbumUser2: AlbumManager,) {
     for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
         console.log(`Stt : ${i + 1}, Ten Album: ${managerAlbumUser2.listAlbum[i].name}`)
     }
+
     let choiceAlbum = +input.question('Nhap so album ban muon chon: ');
     let menu = `--Menu BH trong Album--\n
                   ---1.Them BH---
@@ -99,6 +100,7 @@ function showAlbumUser(managerAlbumUser2: AlbumManager,) {
                   ---0.Thoat---`;
     let choice;
     do {
+
         console.log(menu);
         choice = +input.question('Nhap lua chon cua ban :');
         switch (choice) {
@@ -154,9 +156,9 @@ function findNameMusic(managerAlbumUser2: AlbumManager, choiceAlbum) {
         let flat = 0;
         for (let i = 0; i < managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic.length; i++) {
             if (managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[i].name == name) {
-                    flat++;
-                    console.log(`Ten BH: ${managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[i].name}`)
-            }else{
+                flat++;
+                console.log(`Ten BH: ${managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic[i].name}`)
+            } else {
                 console.log(`--Ko phai BH can tim--`)
             }
         }
@@ -240,7 +242,6 @@ function mainAccount() {
     let menu = `--Menu đăng ký và đăng nhập--\n
                    ---1.Đăng ký---
                    ---2.Đăng nhập---
-                   ---3.Quay lai---
                    ---0.Thoát---`
     let choice;
     do {
@@ -248,13 +249,10 @@ function mainAccount() {
         choice = +input.question('Nhap lua chon cua ban :');
         switch (choice) {
             case 1:
-                Register();
+                register();
                 break;
             case 2:
-                Login();
-                break;
-            case 3:
-                Login();
+                login();
                 break;
             case 0:
                 console.log(menu);
@@ -263,7 +261,7 @@ function mainAccount() {
     } while (choice != 0)
 }
 
-function Register() {
+function register() {
     let menu = `--DANG KY--`
     console.log(menu);
     console.log(`Ten user dk phai du 6 chu cai tro len`)
@@ -272,23 +270,23 @@ function Register() {
     let testUser = usernameRegex.test(username);
     if (testUser == false) {
         console.log(`Đăng ký thất bại!`);
-       Register();
-    }else {
+        register();
+    } else {
         console.log(`User đăng ký hợp lệ!`)
     }
     for (let i = 0; i < listAccount.listAccount.length; i++) {
         if (listAccount.listAccount[i].username == username) {
             console.log(`--Username da ton tai,ban dk lai--`);
-            Register();
+            register();
         }
     }
     console.log(`mk du 3 chu so tro len`)
     let password = input.question('Password :');
-    let passwordRegex =  /^([0-9]){3,}$/
+    let passwordRegex = /^([0-9]){3,}$/
     let testPassword = passwordRegex.test(password);
-    if (testPassword==false){
+    if (testPassword == false) {
         console.log(`Ban nhap sai password!`);
-        Register();
+        register();
     }
     let account: Account = new Account(username, password);
     listAccount.add(account)
@@ -298,20 +296,20 @@ function Register() {
     arrayAlbum.push(managerAlbum);
 }
 
-function Login() {
+function login() {
     let menu = `--DANG NHAP--`
     console.log(menu);
     let username = input.question('UserName :');
-    if (username.length==0){
+    if (username.length == 0) {
         console.log(`---Ten user khong duoc de trong---`)
     }
     let password = input.question('PassWord :');
-       if (password.length==0){
-           console.log(`---Ten pass ko dc de trong---`)
-       }
+    if (password.length == 0) {
+        console.log(`---Ten pass ko dc de trong---`)
+    }
     if (listAccount.findBy(username, password) == -1) {
         console.log('Bạn đăng nhập tài khoản thất bại');
-        Register();
+        register();
     } else {
         console.log('Bạn đăng nhập thành công')
         userCheck = listAccount.findAccount(username, password);

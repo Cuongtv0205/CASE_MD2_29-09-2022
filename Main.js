@@ -39,7 +39,7 @@ function menuAlbum() {
                 findNameAlbum(managerAlbumUser2);
                 break;
             case 0:
-                console.log(menu);
+                mainAccount();
                 break;
         }
     } while (choice != 0);
@@ -62,7 +62,7 @@ function findNameAlbum(managerAlbumUser2) {
             }
         }
         if (flag == 0) {
-            console.log('--Ko co album can tim--');
+            console.log('--Ko co bh trong album can tim--');
         }
     }
 }
@@ -176,7 +176,7 @@ function showMusic(managerAlbumUser2, choiceAlbum) {
                 deleteMusic(managerAlbumUser2, choiceAlbum, choiceMusic);
                 break;
             case 0:
-                menuAlbum();
+                showAlbumUser(managerAlbumUser2);
                 break;
         }
     } while (choice != 0);
@@ -209,20 +209,17 @@ function addMusic(managerAlbumUser2, choiceAlbum) {
     managerAlbumUser2.listAlbum[choiceAlbum - 1].listMusic.push(newMusic);
 }
 function mainAccount() {
-    var menu = "--Menu \u0111\u0103ng k\u00FD v\u00E0 \u0111\u0103ng nh\u1EADp--\n\n                   ---1.\u0110\u0103ng k\u00FD---\n                   ---2.\u0110\u0103ng nh\u1EADp---\n                   ---3.Quay lai---\n                   ---0.Tho\u00E1t---";
+    var menu = "--Menu \u0111\u0103ng k\u00FD v\u00E0 \u0111\u0103ng nh\u1EADp--\n\n                   ---1.\u0110\u0103ng k\u00FD---\n                   ---2.\u0110\u0103ng nh\u1EADp---\n                   ---0.Tho\u00E1t---";
     var choice;
     do {
         console.log(menu);
         choice = +input.question('Nhap lua chon cua ban :');
         switch (choice) {
             case 1:
-                Register();
+                register();
                 break;
             case 2:
-                Login();
-                break;
-            case 3:
-                Login();
+                login();
                 break;
             case 0:
                 console.log(menu);
@@ -230,7 +227,7 @@ function mainAccount() {
         }
     } while (choice != 0);
 }
-function Register() {
+function register() {
     var menu = "--DANG KY--";
     console.log(menu);
     console.log("Ten user dk phai du 6 chu cai tro len");
@@ -239,7 +236,7 @@ function Register() {
     var testUser = usernameRegex.test(username);
     if (testUser == false) {
         console.log("\u0110\u0103ng k\u00FD th\u1EA5t b\u1EA1i!");
-        Register();
+        register();
     }
     else {
         console.log("User \u0111\u0103ng k\u00FD h\u1EE3p l\u1EC7!");
@@ -247,7 +244,7 @@ function Register() {
     for (var i = 0; i < listAccount.listAccount.length; i++) {
         if (listAccount.listAccount[i].username == username) {
             console.log("--Username da ton tai,ban dk lai--");
-            Register();
+            register();
         }
     }
     console.log("mk du 3 chu so tro len");
@@ -256,7 +253,7 @@ function Register() {
     var testPassword = passwordRegex.test(password);
     if (testPassword == false) {
         console.log("Ban nhap sai password!");
-        Register();
+        register();
     }
     var account = new Account_1.Account(username, password);
     listAccount.add(account);
@@ -265,7 +262,7 @@ function Register() {
     var managerAlbum = new albumManager_1.AlbumManager('', user);
     arrayAlbum.push(managerAlbum);
 }
-function Login() {
+function login() {
     var menu = "--DANG NHAP--";
     console.log(menu);
     var username = input.question('UserName :');
@@ -278,7 +275,7 @@ function Login() {
     }
     if (listAccount.findBy(username, password) == -1) {
         console.log('Bạn đăng nhập tài khoản thất bại');
-        Register();
+        register();
     }
     else {
         console.log('Bạn đăng nhập thành công');
