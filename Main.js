@@ -49,22 +49,38 @@ function findNameAlbum(managerAlbumUser2) {
     if (name.length == 0) {
         console.log('Tu khoa khong duoc de trong!');
     }
-    else {
-        var flag = 0;
-        for (var i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+    var name2 = new RegExp(name);
+    var flag = 0;
+    for (var i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+        var test2 = name2.test(managerAlbumUser2.listAlbum[i].name);
+        if (test2 == true) {
             flag++;
-            if (managerAlbumUser2.listAlbum[i].name == name) {
-                flag++;
-                console.log("".concat(flag, ", Ten Album : ").concat(managerAlbumUser2.listAlbum[i].name));
-            }
-            else {
-                console.log("---Ko phai ten album can tim---");
-            }
+            console.log("".concat(flag, ", Ten Album: ").concat(managerAlbumUser2.listAlbum[i].name));
         }
-        if (flag == 0) {
-            console.log('--Ko co bh trong album can tim--');
+        else {
         }
     }
+    if (flag == 0) {
+        console.log("---ko co bh trong album can tim---");
+    }
+    // let name = input.question('Nhap ten album can tim:')
+    // if (name.length == 0) {
+    //     console.log('Tu khoa khong duoc de trong!')
+    // } else {
+    //     let flag = 0;
+    //     for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+    //         flag++;
+    //         if (managerAlbumUser2.listAlbum[i].name == name) {
+    //             flag++;
+    //             console.log(`${flag}, Ten Album : ${managerAlbumUser2.listAlbum[i].name}`)
+    //         } else {
+    //             console.log(`---Ko phai ten album can tim---`)
+    //         }
+    //     }
+    //     if (flag == 0) {
+    //         console.log('--Ko co bh trong album can tim--')
+    //     }
+    // }
 }
 function addAlbum(managerAlbumUser2) {
     console.log("--Them Album--");
@@ -176,7 +192,7 @@ function showMusic(managerAlbumUser2, choiceAlbum) {
                 deleteMusic(managerAlbumUser2, choiceAlbum, choiceMusic);
                 break;
             case 0:
-                showAlbumUser(managerAlbumUser2);
+                menuAlbum();
                 break;
         }
     } while (choice != 0);

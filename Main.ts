@@ -54,25 +54,43 @@ function menuAlbum() {
     } while (choice != 0)
 }
 
+// tìm kiếm theo tên gần đúng
 function findNameAlbum(managerAlbumUser2: AlbumManager) {
     let name = input.question('Nhap ten album can tim:')
     if (name.length == 0) {
         console.log('Tu khoa khong duoc de trong!')
-    } else {
-        let flag = 0;
-        for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+    }
+    let name2 = new RegExp(name);
+    let flag = 0;
+    for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+        let test2 = name2.test(managerAlbumUser2.listAlbum[i].name);
+        if (test2 == true) {
             flag++;
-            if (managerAlbumUser2.listAlbum[i].name == name) {
-                flag++;
-                console.log(`${flag}, Ten Album : ${managerAlbumUser2.listAlbum[i].name}`)
-            } else {
-                console.log(`---Ko phai ten album can tim---`)
-            }
-        }
-        if (flag == 0) {
-            console.log('--Ko co bh trong album can tim--')
+            console.log(`${flag}, Ten Album: ${managerAlbumUser2.listAlbum[i].name}`)
         }
     }
+    if (flag == 0) {
+        console.log(`---ko co bh trong album can tim---`)
+    }
+
+    // let name = input.question('Nhap ten album can tim:')
+    // if (name.length == 0) {
+    //     console.log('Tu khoa khong duoc de trong!')
+    // } else {
+    //     let flag = 0;
+    //     for (let i = 0; i < managerAlbumUser2.listAlbum.length; i++) {
+    //         flag++;
+    //         if (managerAlbumUser2.listAlbum[i].name == name) {
+    //             flag++;
+    //             console.log(`${flag}, Ten Album : ${managerAlbumUser2.listAlbum[i].name}`)
+    //         } else {
+    //             console.log(`---Ko phai ten album can tim---`)
+    //         }
+    //     }
+    //     if (flag == 0) {
+    //         console.log('--Ko co bh trong album can tim--')
+    //     }
+    // }
 }
 
 function addAlbum(managerAlbumUser2: AlbumManager) {
